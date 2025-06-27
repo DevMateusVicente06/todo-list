@@ -53,6 +53,21 @@ def remover_tarefa(tarefas, indice):
     else:
         print("\n❌ Índice inválido. Por favor, escolha um número da lista.")
 
+def editar_descricao(tarefas, indice):
+    """Edita a descrição de uma tarefa existente."""
+    indice_real = indice - 1
+    if 0 <= indice_real < len(tarefas):
+        nova_descricao = input("Digite a nova descrição da tarefa: ")
+        if nova_descricao:
+            nova_prioridade = input("Digite a nova prioridade (alta, media, baixa): ")
+            tarefas[indice_real]["descricao"] = nova_descricao
+            tarefas[indice_real]["prioridade"] = nova_prioridade
+            print(f"\n✅ Tarefa {indice} atualizada para '{nova_descricao}' com prioridade '{nova_prioridade}'!")
+        else:
+            print("\n❌ A descrição não pode ser vazia.")
+    else:
+        print("\n❌ Índice inválido. Por favor, escolha um número da lista.")
+
 def exibir_menu():
     """Exibe o menu de opções para o usuário."""
     print("\n--- MENU ---")
@@ -60,6 +75,7 @@ def exibir_menu():
     print("2. Listar Tarefas")
     print("3. Marcar Tarefa como Concluída")
     print("4. Remover Tarefa")
+    print("5. Editar Descrição de Tarefa")
     print("0. Sair")
 
 def main():
@@ -90,6 +106,13 @@ def main():
             try:
                 indice = int(input("Digite o número da tarefa para remover: "))
                 remover_tarefa(lista_de_tarefas, indice)
+            except ValueError:
+                print("\n❌ Entrada inválida. Por favor, digite um número.")
+        elif escolha == '5':
+            listar_tarefas(lista_de_tarefas)
+            try:
+                indice = int(input("Digite o número da tarefa para editar: "))
+                editar_descricao(lista_de_tarefas, indice)
             except ValueError:
                 print("\n❌ Entrada inválida. Por favor, digite um número.")
         elif escolha == '0':
